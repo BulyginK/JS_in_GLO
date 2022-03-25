@@ -1,11 +1,16 @@
-let title;
-let screens;
-let screenPrice;
-let rollback;
-let fullPrice;
-let adaptive;
+let title = "Web-разработка";
+let screens = "Простые, Сложные, Интерактивные";
+let screenPrice = 111;
+let rollback = 11;
+let fullPrice = 1111;
+let adaptive = true;
 
-alert('Сообщение пришло?');
-console.log('Проверка на ошибки');
-
-// Выполнение задания по 1 уроку
+console.log(typeof title);
+console.log(typeof fullPrice);
+console.log(typeof adaptive);
+console.log(screens.length);
+console.log("Стоимость верстки экрана " + screenPrice +" рублей");
+console.log("Стоимость разработки сайта " + fullPrice + " рублей");
+screens = screens.toLowerCase();
+console.log(screens.split(", "));
+console.log(fullPrice * (rollback/100) + " рублей");
