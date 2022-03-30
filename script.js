@@ -16,27 +16,27 @@ let rollback = 20;
 let servicePercentPrice;
 
 
-const getTitle = function() {
+const getTitle = function () {
     return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase();
 }
 
-const getAllServicePrices = function() {
+const getAllServicePrices = function () {
     return servicePrice1 + servicePrice2;
 }
 
-function getFullPrice() {
+function getFullPrice () {
     return screenPrice + allServicePrices;
 }
 
-const getServicePercentPrices = function() {
+const getServicePercentPrices = function () {
     return Math.ceil(fullPrice * (1 - rollback/100));
 }
 
-const showTypeOf = function(variable) {
+const showTypeOf = function (variable) {
     console.log(variable, typeof variable);
 }
 
-const getRollbackMessage = function(price) {
+const getRollbackMessage = function (price) {
     if (price >= 30000) {
         return "Даем скидку в 10%";
     } else if (price >= 15000) {
