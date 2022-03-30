@@ -2,39 +2,41 @@
 
 let title = prompt('Как называется ваш проект?');
 let screens = prompt('Какие типы экранов нужно разработать?', 'Например: Простые, Сложные, Интерактивные');
-let screenPrice = prompt('Сколько будет стоить данная работа?', 'Например: 12000');
+let screenPrice = +prompt('Сколько будет стоить данная работа?', 'Например: 12000');
 let adaptive = confirm('Нужен ли адаптив на сайте?');
+
 let service1 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice1 = prompt('Сколько это будет стоить?');
+let servicePrice1 = +prompt('Сколько это будет стоить?');
 let service2 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice2 = prompt('Сколько это будет стоить?');
+let servicePrice2 = +prompt('Сколько это будет стоить?');
+
 let allServicePrices;
 let fullPrice;
 let rollback = 20;
 let servicePercentPrice;
 
 
-const getTitle = function(title) {
+const getTitle = function () {
     return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase();
 }
 
-const getAllServicePrices = function(serPr1, serPr2) {
-    return +serPr1 + +serPr2;
+const getAllServicePrices = function () {
+    return servicePrice1 + servicePrice2;
 }
 
-function getFullPrice(scrPr, allSerPr) {
-    return +scrPr + allSerPr;
+function getFullPrice () {
+    return screenPrice + allServicePrices;
 }
 
-const getServicePercentPrices = function(fPrice, rBack) {
-    return Math.ceil(fPrice * (1 - rBack/100));
+const getServicePercentPrices = function () {
+    return Math.ceil(fullPrice * (1 - rollback/100));
 }
 
-const showTypeOf = function(variable) {
+const showTypeOf = function (variable) {
     console.log(variable, typeof variable);
 }
 
-const getRollbackMessage = function(price) {
+const getRollbackMessage = function (price) {
     if (price >= 30000) {
         return "Даем скидку в 10%";
     } else if (price >= 15000) {
@@ -46,10 +48,10 @@ const getRollbackMessage = function(price) {
     }
 }
 
-title = getTitle(title);
-allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-fullPrice = getFullPrice(screenPrice, allServicePrices);
-servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+title = getTitle();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
 
 showTypeOf(title);
 showTypeOf(fullPrice);
