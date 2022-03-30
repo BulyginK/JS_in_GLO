@@ -1,27 +1,49 @@
 'use strict';
 
-let title = prompt('Как называется ваш проект?');
-let screens = prompt('Какие типы экранов нужно разработать?', 'Например: Простые, Сложные, Интерактивные');
-let screenPrice = +prompt('Сколько будет стоить данная работа?', 'Например: 12000');
-let adaptive = confirm('Нужен ли адаптив на сайте?');
-
-let service1 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice1 = +prompt('Сколько это будет стоить?');
-let service2 = prompt('Какой дополнительный тип услуги нужен?');
-let servicePrice2 = +prompt('Сколько это будет стоить?');
-
+let title
+let screens
+let screenPrice
+let adaptive
+let rollback = 20;
+let service1;
+let service2;
 let allServicePrices;
 let fullPrice;
-let rollback = 20;
 let servicePercentPrice;
 
+// Проверка на число
+const isNamber = function (num) {
+    return !isNaN(parseFloat(num)) && isFinite(num);
+}
 
-const getTitle = function () {
-    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase();
+const asking = function () {
+    title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+    do {
+        screenPrice = +prompt("Сколько будет стоить данная работа?", 20000);
+    } while (!isNamber(screenPrice));
+    adaptive = confirm('Нужен ли адаптив на сайте?');
+}
+
+// Переводим текст на вариант "первый символ с большой буквы, остальные с маленькой (+убираем пробелы вначале)"
+const getTitle = function (str) {
+    return str.trim().charAt(0).toUpperCase() + str.trim().slice(1).toLowerCase();
 }
 
 const getAllServicePrices = function () {
-    return servicePrice1 + servicePrice2;
+    let sum = 0;
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            service1 = prompt("Какой дополнительный тип услуги нужен?", "Метрика");
+        } else if (i === 1) {
+            service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
+        }
+        sum += +prompt('Сколько это будет стоить?');
+        while (!isNamber(sum)) {
+            sum = +prompt('Сколько это будет стоить?');
+        }
+    }
+    return sum;
 }
 
 function getFullPrice () {
@@ -48,7 +70,8 @@ const getRollbackMessage = function (price) {
     }
 }
 
-title = getTitle();
+asking();
+title = getTitle(title);
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
@@ -60,3 +83,7 @@ showTypeOf(adaptive);
 console.log(screens.toLowerCase().split(", "));
 console.log(getRollbackMessage(fullPrice));
 console.log(servicePercentPrice);
+
+// Проверить типы получаемых переменных
+console.log("allServicePrices", allServicePrices, typeof allServicePrices);;
+console.log("servicePercentPrice", servicePercentPrice, typeof servicePercentPrice);
