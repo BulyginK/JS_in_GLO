@@ -85,5 +85,5 @@ console.log(getRollbackMessage(fullPrice));
 console.log(servicePercentPrice);
 
 // Проверить типы получаемых переменных
-console.log("allServicePrices", allServicePrices, typeof allServicePrices);;
+console.log("allServicePrices", allServicePrices, typeof allServicePrices);
 console.log("servicePercentPrice", servicePercentPrice, typeof servicePercentPrice);
