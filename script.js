@@ -12,11 +12,11 @@ let fullPrice;
 let servicePercentPrice;
 
 // Проверка на число
-const isNamber = function (num) {
+const isNamber = function(num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
-const asking = function () {
+const asking = function() {
     title = prompt("Как называется ваш проект?", "Калькулятор верстки");
     screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
     do {
@@ -26,11 +26,11 @@ const asking = function () {
 }
 
 // Переводим текст на вариант "первый символ с большой буквы, остальные с маленькой (+убираем пробелы вначале)"
-const getTitle = function (str) {
+const getTitle = function(str) {
     return str.trim().charAt(0).toUpperCase() + str.trim().slice(1).toLowerCase();
 }
 
-const getAllServicePrices = function () {
+const getAllServicePrices = function() {
     let sum = 0;
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
@@ -42,24 +42,24 @@ const getAllServicePrices = function () {
         while (!isNamber(servicePrice)) {
             servicePrice = +prompt('Сколько это будет стоить?');
         }
-        sum += servicePrice
-        }
+        sum += servicePrice;
+    }
     return sum;
 }
 
-function getFullPrice () {
+function getFullPrice() {
     return screenPrice + allServicePrices;
 }
 
-const getServicePercentPrices = function () {
+const getServicePercentPrices = function() {
     return Math.ceil(fullPrice * (1 - rollback/100));
 }
 
-const showTypeOf = function (variable) {
+const showTypeOf = function(variable) {
     console.log(variable, typeof variable);
 }
 
-const getRollbackMessage = function (price) {
+const getRollbackMessage = function(price) {
     if (price >= 30000) {
         return "Даем скидку в 10%";
     } else if (price >= 15000) {
