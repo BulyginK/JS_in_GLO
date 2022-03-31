@@ -38,11 +38,12 @@ const getAllServicePrices = function () {
         } else if (i === 1) {
             service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
         }
-        sum += +prompt('Сколько это будет стоить?');
-        while (!isNamber(sum)) {
-            sum = +prompt('Сколько это будет стоить?');
+        let servicePrice = +prompt('Сколько это будет стоить?');
+        while (!isNamber(servicePrice)) {
+            servicePrice = +prompt('Сколько это будет стоить?');
         }
-    }
+        sum += servicePrice
+        }
     return sum;
 }
 
