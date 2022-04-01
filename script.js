@@ -1,16 +1,5 @@
 'use strict';
 
-// let title
-// let screens
-// let screenPrice
-// let adaptive
-// let rollback = 20;
-// let service1;
-// let service2;
-// let allServicePrices;
-// let fullPrice;
-// let servicePercentPrice;
-
 const appData = {
     title: '',
     screens: '',
