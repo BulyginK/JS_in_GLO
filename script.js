@@ -1,42 +1,54 @@
 'use strict';
 
-let title
-let screens
-let screenPrice
-let adaptive
-let rollback = 20;
-let service1;
-let service2;
-let allServicePrices;
-let fullPrice;
-let servicePercentPrice;
+// let title
+// let screens
+// let screenPrice
+// let adaptive
+// let rollback = 20;
+// let service1;
+// let service2;
+// let allServicePrices;
+// let fullPrice;
+// let servicePercentPrice;
+
+const appData = {
+    title: '',
+    screens: '',
+    screenPrice: 0,
+    adaptive: true,
+    rollback: 20,
+    service1: '',
+    service2: '',
+    allServicePrices: 0,
+    fullPrice: 0,
+    servicePercentPrice: 0,
+    asking: function() {
+        appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+        appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+        do {
+            appData.screenPrice = +prompt("Сколько будет стоить данная работа?", 20000);
+        } while (!isNamber(appData.screenPrice));
+        appData.adaptive = confirm('Нужен ли адаптив на сайте?');
+    }
+}
 
 // Проверка на число
 const isNamber = function(num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
-const asking = function() {
-    title = prompt("Как называется ваш проект?", "Калькулятор верстки");
-    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
-    do {
-        screenPrice = +prompt("Сколько будет стоить данная работа?", 20000);
-    } while (!isNamber(screenPrice));
-    adaptive = confirm('Нужен ли адаптив на сайте?');
-}
-
 // Переводим текст на вариант "первый символ с большой буквы, остальные с маленькой (+убираем пробелы вначале)"
 const getTitle = function() {
-    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase();
+    return appData.title.trim().charAt(0).toUpperCase() + appData.title.trim().slice(1).toLowerCase();
 }
 
 const getAllServicePrices = function() {
     let sum = 0;
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
-            service1 = prompt("Какой дополнительный тип услуги нужен?", "Метрика");
+            appData.service1 = prompt("Какой дополнительный тип услуги нужен?", "Метрика");
         } else if (i === 1) {
-            service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
+            appData.service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
         }
         let servicePrice = +prompt('Сколько это будет стоить?');
         while (!isNamber(servicePrice)) {
@@ -48,11 +60,11 @@ const getAllServicePrices = function() {
 }
 
 function getFullPrice() {
-    return screenPrice + allServicePrices;
+    return appData.screenPrice + appData.allServicePrices;
 }
 
 const getServicePercentPrices = function() {
-    return Math.ceil(fullPrice * (1 - rollback/100));
+    return Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
 }
 
 const getRollbackMessage = function(price) {
@@ -67,18 +79,11 @@ const getRollbackMessage = function(price) {
     }
 }
 
-asking();
-title = getTitle();
-allServicePrices = getAllServicePrices();
-fullPrice = getFullPrice();
-servicePercentPrice = getServicePercentPrices();
+appData.asking();
+appData.title = getTitle();
+appData.allServicePrices = getAllServicePrices();
+appData.fullPrice = getFullPrice();
+appData.servicePercentPrice = getServicePercentPrices();
 
-console.log(screens.toLowerCase().split(", "));
-console.log(getRollbackMessage(fullPrice));
-console.log(servicePercentPrice);
-
-// Проверить типы получаемых переменных
-console.log("Стоимость верстки экранов " + screenPrice + " рублей");
-console.log("Стоимость разработки сайта " + fullPrice + " рублей");
-console.log("allServicePrices", allServicePrices, typeof allServicePrices);
-console.log("servicePercentPrice", servicePercentPrice, typeof servicePercentPrice);
+console.log(appData.fullPrice);
+console.log(appData.servicePercentPrice);
