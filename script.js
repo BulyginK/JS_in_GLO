@@ -55,10 +55,6 @@ const getServicePercentPrices = function() {
     return Math.ceil(fullPrice * (1 - rollback/100));
 }
 
-const showTypeOf = function(variable) {
-    console.log(variable, typeof variable);
-}
-
 const getRollbackMessage = function(price) {
     if (price >= 30000) {
         return "Даем скидку в 10%";
@@ -76,10 +72,6 @@ title = getTitle(title);
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
-
-showTypeOf(title);
-showTypeOf(fullPrice);
-showTypeOf(adaptive);
 
 console.log(screens.toLowerCase().split(", "));
 console.log(getRollbackMessage(fullPrice));
