@@ -26,8 +26,8 @@ const asking = function() {
 }
 
 // Переводим текст на вариант "первый символ с большой буквы, остальные с маленькой (+убираем пробелы вначале)"
-const getTitle = function(str) {
-    return str.trim().charAt(0).toUpperCase() + str.trim().slice(1).toLowerCase();
+const getTitle = function() {
+    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase();
 }
 
 const getAllServicePrices = function() {
@@ -68,7 +68,7 @@ const getRollbackMessage = function(price) {
 }
 
 asking();
-title = getTitle(title);
+title = getTitle();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
@@ -78,5 +78,7 @@ console.log(getRollbackMessage(fullPrice));
 console.log(servicePercentPrice);
 
 // Проверить типы получаемых переменных
+console.log("Стоимость верстки экранов " + screenPrice + " рублей");
+console.log("Стоимость разработки сайта " + fullPrice + " рублей");
 console.log("allServicePrices", allServicePrices, typeof allServicePrices);
 console.log("servicePercentPrice", servicePercentPrice, typeof servicePercentPrice);
