@@ -24,6 +24,7 @@ const appData = {
         } while (!appData.isNamber(appData.screenPrice));
 
         appData.adaptive = confirm('Нужен ли адаптив на сайте?');
+        return appData.screenPrice, appData.adaptive;
     },
 
     getTitle: function() {
@@ -31,7 +32,7 @@ const appData = {
     },
 
     getAllServicePrices: function() {
-        let sum = 0;
+        // let sum = 0;
         for (let i = 0; i < 2; i++) {
             let servicePrice = 0;
             
@@ -42,20 +43,22 @@ const appData = {
             }
             
             do {
-                servicePrice = prompt('Сколько это будет стоить?');
+                servicePrice = prompt('Сколько это будет стоить?', "1500");
             } while (!appData.isNamber(servicePrice));
             
-            sum += +servicePrice;
+            appData.allServicePrices += +servicePrice;
         }
-        return sum;
+        return appData.service1, appData.service2, appData.allServicePrices;
     },
 
     getFullPrice: function () {
-        return appData.screenPrice + appData.allServicePrices;
+        appData.fullPrice = appData.screenPrice + appData.allServicePrices
+        return appData.fullPrice;
     },
 
     getServicePercentPrices: function() {
-        return Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
+        appData.servicePercentPrice = Math.ceil(appData.fullPrice * (1 - appData.rollback/100))
+        return appData.servicePercentPrice;
     },
 
     getRollbackMessage: function(price) {
@@ -68,10 +71,7 @@ const appData = {
         } else {
             return "Что то пошло не так!";
         }
-    },
-
-
-
+    }
 }
 
 appData.asking();
@@ -81,6 +81,7 @@ appData.getFullPrice();
 appData.getServicePercentPrices();
 
 
+
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrice);
-console.log(appData.getRollbackMessage.fullPrice);
+console.log(appData.getRollbackMessage);
