@@ -39,7 +39,7 @@ const appData = {
             if (i === 0) {
                 appData.service1 = prompt("Какой дополнительный тип услуги нужен?", "Метрика");
             } else if (i === 1) {
-                appData.service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
+                appData.service2 = prompt("Какой дополнительный тип услуги нужен?", "Форма обратной связи");
             }
             
             do {
@@ -71,15 +71,25 @@ const appData = {
         } else {
             return "Что то пошло не так!";
         }
+    },
+
+    logger: function() {
+        console.log(appData.fullPrice);
+        console.log(appData.servicePercentPrice);
+        console.log(appData.getRollbackMessage(appData.fullPrice));
+        for (let key in appData) {
+            console.log("Ключ: " + key + " " + "Значение: " + appData[key]);
+        }
+    },
+
+    start: function() {
+        appData.asking()
+        appData.getTitle();
+        appData.getAllServicePrices();
+        appData.getFullPrice();
+        appData.getServicePercentPrices();
+        appData.logger();
     }
 }
 
-appData.asking();
-appData.getTitle();
-appData.getAllServicePrices();
-appData.getFullPrice();
-appData.getServicePercentPrices();
-
-console.log(appData.fullPrice);
-console.log(appData.servicePercentPrice);
-console.log(appData.getRollbackMessage);
+appData.start();
