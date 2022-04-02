@@ -80,8 +80,6 @@ appData.getAllServicePrices();
 appData.getFullPrice();
 appData.getServicePercentPrices();
 
-
-
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrice);
 console.log(appData.getRollbackMessage);
