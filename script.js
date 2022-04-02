@@ -28,7 +28,8 @@ const appData = {
     },
 
     getTitle: function() {
-        return appData.title.trim().charAt(0).toUpperCase() + appData.title.trim().slice(1).toLowerCase();
+        appData.title = appData.title.trim().charAt(0).toUpperCase() + appData.title.trim().slice(1).toLowerCase()
+        return appData.title;
     },
 
     getAllServicePrices: function() {
