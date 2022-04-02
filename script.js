@@ -19,7 +19,7 @@ const appData = {
         appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
         do {
             appData.screenPrice = +prompt("Сколько будет стоить данная работа?", 20000);
-        } while (!isNamber(appData.screenPrice));
+        } while (!appData.isNamber(appData.screenPrice));
         appData.adaptive = confirm('Нужен ли адаптив на сайте?');
     },
     getTitle: function() {
@@ -34,7 +34,7 @@ const appData = {
                 appData.service2 = prompt("Какой дополнительный тип услуги нужен?", "Адаптив");
             }
             let servicePrice = +prompt('Сколько это будет стоить?');
-            while (!isNamber(servicePrice)) {
+            while (!appData.isNamber(servicePrice)) {
                 servicePrice = +prompt('Сколько это будет стоить?');
             }
             sum += servicePrice;
