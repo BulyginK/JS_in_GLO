@@ -53,7 +53,7 @@ const appData = {
             } while (appData.isNamber(+name))
             
             for(let key in appData.services) {
-                if (name == key) {
+                if (name === key) {
                     name = name + i;
                 }
             }
