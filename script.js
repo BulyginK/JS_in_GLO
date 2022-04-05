@@ -51,10 +51,16 @@ const appData = {
             do {
                 name = prompt("Какой дополнительный тип услуги нужен?");
             } while (appData.isNamber(+name))
+            
+            for(let key in appData.services) {
+                if (name == key) {
+                    name = name + i;
+                }
+            }
 
             do {
                 price = prompt('Сколько это будет стоить?');
-            } while (!appData.isNamber(price));
+            } while (!appData.isNamber(price));   
             
             appData.services[name] = +price;
         }
@@ -67,7 +73,7 @@ const appData = {
             appData.screenPrice += +screen.price;
         }
 
-        for(let key in appData.services) {
+        for (let key in appData.services) {
             appData.allServicePrices += appData.services[key];
         }
     },
