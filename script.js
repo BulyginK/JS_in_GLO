@@ -97,10 +97,11 @@ const appData = {
     },
 
     logger: function() {
+        console.log(appData.screens);
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
         console.log(appData.services);
-    },    
+    },
 }
 
 appData.start();
