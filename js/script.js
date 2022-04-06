@@ -3,8 +3,8 @@
 const titleHeader = document.getElementsByTagName('h1')[0];
 const handlerBtn = document.getElementsByClassName('handler_btn');
 const plusBtn = document.querySelector('.screen-btn');
-const otherItemsPs = document.querySelectorAll('.other-items' && '.percent');
-const otherItemsNum = document.querySelectorAll('.other-items' && '.number');
+const otherItemsPs = document.querySelectorAll('.other-items.percent');
+const otherItemsNum = document.querySelectorAll('.other-items.number');
 const inputRange = document.querySelector('.rollback > [type="range"]');
 
 console.log(titleHeader);
