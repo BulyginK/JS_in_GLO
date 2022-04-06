@@ -1,5 +1,22 @@
 'use strict';
 
+const titleHeader = document.getElementsByTagName('h1')[0];
+const handlerBtn = document.getElementsByClassName('handler_btn');
+const plusBtn = document.querySelector('.screen-btn');
+const otherItemsPs = document.querySelectorAll('.other-items' && '.percent');
+const otherItemsNum = document.querySelectorAll('.other-items' && '.number');
+const inputRange = document.querySelector('.rollback > [type="range"]');
+
+console.log(titleHeader);
+console.log(handlerBtn);
+console.log(plusBtn);
+console.log(otherItemsPs);
+console.log(otherItemsNum);
+console.log(inputRange);
+
+
+/*
+
 const appData = {
     title: '',
     screens: [],
@@ -104,3 +121,5 @@ const appData = {
 }
 
 appData.start();
+
+*/
