@@ -3,19 +3,12 @@
 const titleHeader = document.getElementsByTagName('h1')[0];
 const handlerBtn = document.getElementsByClassName('handler_btn');
 const plusBtn = document.querySelector('.screen-btn');
-const otherItemsPs = document.querySelectorAll('.other-items.percent');
-const otherItemsNum = document.querySelectorAll('.other-items.number');
-const inputRange = document.querySelector('.rollback > [type="range"]');
-
-console.log(titleHeader);
-console.log(handlerBtn);
-console.log(plusBtn);
-console.log(otherItemsPs);
-console.log(otherItemsNum);
-console.log(inputRange);
-
-
-/*
+const otherItemsPs = document.querySelectorAll('.other-items' && '.percent');
+const otherItemsNum = document.querySelectorAll('.other-items' && '.number');
+const rollbackRange = document.querySelector('.rollback > div > [type="range"]');
+const valueRange = document.querySelector('.rollback > div > .range-value');
+const totalInput = document.getElementsByClassName('total-input');
+let screen = document.querySelectorAll('.screen > div');
 
 const appData = {
     title: '',
@@ -121,5 +114,3 @@ const appData = {
 }
 
 appData.start();
-
-*/
