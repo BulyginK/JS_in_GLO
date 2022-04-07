@@ -100,14 +100,7 @@ const appData = {
         } else {
             return "Что то пошло не так!";
         }
-    },
-
-    logger: function() {
-        console.log(appData.screens);
-        console.log(appData.fullPrice);
-        console.log(appData.servicePercentPrice);
-        console.log(appData.services);
-    },
+    }
 }
 
 appData.start();
