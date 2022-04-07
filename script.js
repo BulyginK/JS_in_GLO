@@ -103,17 +103,11 @@ const appData = {
     },
 
     logger: function() {
-<<<<<<< HEAD
-        for (let key in appData) {
-            console.log("Ключ: " + key + " " + "Значение: " + appData[key]);
-        }
-    }
-=======
+        console.log(appData.screens);
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
-        console.log(appData.screens);
-    }    
->>>>>>> 6bbf5db78bff717c6cf567f52f79e5cfe4d0cbbd
+        console.log(appData.services);
+    },
 }
 
 appData.start();
