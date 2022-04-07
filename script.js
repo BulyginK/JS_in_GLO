@@ -100,6 +100,12 @@ const appData = {
         } else {
             return "Что то пошло не так!";
         }
+    },
+
+    logger: function() {
+        for (let key in appData) {
+            console.log("Ключ: " + key + " " + "Значение: " + appData[key]);
+        }
     }
 }
 
