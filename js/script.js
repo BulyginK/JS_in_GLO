@@ -45,11 +45,48 @@ const appData = {
         
         appData.addPrices();
 
+        
         // appData.getServicePercentPrices();
         // appData.logger();
-
-        appData.showResult();
+        
+        appData.check();        
     },
+    check: function() {
+        
+        function i(item) {
+            if (item.name != "Тип экранов" || item.price != 0) {
+                
+            }
+        }
+
+        appData.screens.find(i)
+
+        // let checkFind = appData.screens.find(function() {
+        //     console.log(appData.screens.name);
+        //     appData.screens.name == "Тип экранов";
+        // })
+
+        // console.log(checkFind);
+
+
+        // for (let i = 0; i < appData.screens.length; i++) {
+        //     appData.screens.find(function() {
+        //         console.log(appData.screens[i].name);
+        //         appData.screens[i].name == "Тип экранов";
+        //     })
+    
+        //     console.log(); 
+            
+            
+            // if(appData.screens[i].name === "Тип экранов" || appData.screens[i].price === 0) {
+            //     console.log("не сработал");
+            // } else {
+            //     console.log("сработал");
+            // }
+            // console.log("кот прошел");
+            // appData.showResult();
+            // });
+    },    
     showResult: function() {
         total.value = appData.screenPrice;
         totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
@@ -57,6 +94,7 @@ const appData = {
     },
     addScreens: function() {
         screens = document.querySelectorAll('.screen');
+        
         screens.forEach(function(screen, index) {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
@@ -131,4 +169,4 @@ const appData = {
     },    
 }
 
-appData.start();
+appData.init();
