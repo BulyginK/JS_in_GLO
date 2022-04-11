@@ -45,21 +45,21 @@ const appData = {
     start: function() {
         appData.addScreens();
         appData.check();
-        // appData.logger();
+        appData.logger();
     },
     check: function() {
-        let empty = appData.screens.find(search)
+        let empty = appData.screens.find(search);
         function search(item) {
             return item.name === "Тип экранов" || item.price === 0
-        }
+        };
         if (empty === undefined) {
             appData.addServices();
             appData.addPrices();
             appData.showResult();
         } else {
             appData.screens = [];
-            console.log(appData.fullPrice);
-        }
+            appData.count = 0;
+        };
     },    
     showResult: function() {
         total.value = appData.screenPrice;
@@ -128,17 +128,6 @@ const appData = {
 
         appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
         appData.servicePercentPrice = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
-    },
-    getRollbackMessage: function(price) {
-        if (price >= 30000) {
-            return "Даем скидку в 10%";
-        } else if (price >= 15000) {
-            return "Даем скидку в 5%";
-        } else if (price > 0) {
-            return "Скидка не предусмотрена";
-        } else {
-            return "Что то пошло не так!";
-        }
     },
     logger: function() {
         console.log(appData.fullPrice);
