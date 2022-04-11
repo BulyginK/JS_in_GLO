@@ -41,51 +41,22 @@ const appData = {
     },
     start: function() {
         appData.addScreens();
-        appData.addServices();
-        
-        appData.addPrices();
-
-        
+        appData.check();
         // appData.getServicePercentPrices();
         // appData.logger();
-        
-        appData.check();        
     },
     check: function() {
-        
-        function i(item) {
-            if (item.name != "Тип экранов" || item.price != 0) {
-                
-            }
+        let empty = appData.screens.find(search)
+        function search(item) {
+            return item.name === "Тип экранов" || item.price === 0
         }
-
-        appData.screens.find(i)
-
-        // let checkFind = appData.screens.find(function() {
-        //     console.log(appData.screens.name);
-        //     appData.screens.name == "Тип экранов";
-        // })
-
-        // console.log(checkFind);
-
-
-        // for (let i = 0; i < appData.screens.length; i++) {
-        //     appData.screens.find(function() {
-        //         console.log(appData.screens[i].name);
-        //         appData.screens[i].name == "Тип экранов";
-        //     })
-    
-        //     console.log(); 
-            
-            
-            // if(appData.screens[i].name === "Тип экранов" || appData.screens[i].price === 0) {
-            //     console.log("не сработал");
-            // } else {
-            //     console.log("сработал");
-            // }
-            // console.log("кот прошел");
-            // appData.showResult();
-            // });
+        if (empty === undefined) {
+            appData.addServices();
+            appData.addPrices();
+            appData.showResult();
+        } else {
+            appData.screens = [];
+        }
     },    
     showResult: function() {
         total.value = appData.screenPrice;
