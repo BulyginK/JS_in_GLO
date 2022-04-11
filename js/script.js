@@ -34,11 +34,10 @@ const appData = {
     init: function() {
         appData.addTitile();
         startBtn.addEventListener('click', appData.start);
-        buttonPlus.addEventListener('click', appData.addScreenBlock)
+        buttonPlus.addEventListener('click', appData.addScreenBlock);
     },
     addTitile: function() {
         document.title = title.textContent;
-        console.log();
     },
     start: function() {
         appData.addScreens();
@@ -48,7 +47,7 @@ const appData = {
 
         // appData.getServicePercentPrices();
         // appData.logger();
-        
+
         appData.showResult();
     },
     showResult: function() {
@@ -69,7 +68,6 @@ const appData = {
                 price: +select.value * +input.value
             });
         });
-        console.log(appData.screens);
     },
     addServices: function() {
         otherItemsPercent.forEach(function(item) {
