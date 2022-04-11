@@ -24,7 +24,7 @@ const appData = {
     screens: [],
     screenPrice: 0,
     adaptive: true,
-    rollback: 20,
+    rollback: 0,
     servicesPercent: {},
     servicesNumber: {},
     servicePricesPercent: 0,
@@ -33,8 +33,10 @@ const appData = {
     servicePercentPrice: 0,
     init: function() {
         appData.addTitile();
+        appData.addRangeSpan();
         startBtn.addEventListener('click', appData.start);
         buttonPlus.addEventListener('click', appData.addScreenBlock);
+        inputRange.addEventListener('input', appData.addRangeSpan);
     },
     addTitile: function() {
         document.title = title.textContent;
@@ -88,7 +90,6 @@ const appData = {
                 appData.servicesPercent[label.textContent] = + input.value;
             };
         });
-
         otherItemsNumber.forEach(function(item) {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
@@ -132,7 +133,11 @@ const appData = {
             return "Что то пошло не так!";
         }
     },
-
+    addRangeSpan: function() {
+        let size = +inputRange.value;
+        inputRangeValue.textContent = size + '%';
+        appData.rollback = size;
+    },
     logger: function() {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
