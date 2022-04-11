@@ -58,12 +58,14 @@ const appData = {
             appData.showResult();
         } else {
             appData.screens = [];
+            console.log(appData.fullPrice);
         }
     },    
     showResult: function() {
         total.value = appData.screenPrice;
         totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
         fullTotalCount.value = appData.fullPrice;
+        totalCountRollback.value = appData.servicePercentPrice;
     },
     addScreens: function() {
         screens = document.querySelectorAll('.screen');
@@ -104,6 +106,11 @@ const appData = {
         const cloneScreen = screens[0].cloneNode(true);
         screens[screens.length - 1].after(cloneScreen);
     },
+    addRangeSpan: function() {
+        let size = +inputRange.value;
+        inputRangeValue.textContent = size + '%';
+        appData.rollback = size;
+    },
     addPrices: function () {
         for (let screen of appData.screens) {
             appData.screenPrice += +screen.price;
@@ -118,10 +125,12 @@ const appData = {
         }
 
         appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
-    },
-    getServicePercentPrices: function() {
         appData.servicePercentPrice = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
+        console.log(appData.servicePercentPrice);
     },
+    // getServicePercentPrices: function() {
+        
+    // },
     getRollbackMessage: function(price) {
         if (price >= 30000) {
             return "Даем скидку в 10%";
@@ -132,11 +141,6 @@ const appData = {
         } else {
             return "Что то пошло не так!";
         }
-    },
-    addRangeSpan: function() {
-        let size = +inputRange.value;
-        inputRangeValue.textContent = size + '%';
-        appData.rollback = size;
     },
     logger: function() {
         console.log(appData.fullPrice);
