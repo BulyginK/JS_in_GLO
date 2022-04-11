@@ -22,6 +22,7 @@ let screens = document.querySelectorAll('.screen');
 const appData = {
     title: '',
     screens: [],
+    count: 0,
     screenPrice: 0,
     adaptive: true,
     rollback: 0,
@@ -44,7 +45,6 @@ const appData = {
     start: function() {
         appData.addScreens();
         appData.check();
-        // appData.getServicePercentPrices();
         // appData.logger();
     },
     check: function() {
@@ -63,6 +63,7 @@ const appData = {
     },    
     showResult: function() {
         total.value = appData.screenPrice;
+        totalCount.value = appData.count;
         totalCountOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
         fullTotalCount.value = appData.fullPrice;
         totalCountRollback.value = appData.servicePercentPrice;
@@ -75,6 +76,7 @@ const appData = {
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
 
+            appData.count += +input.value;
             appData.screens.push({
                 id: index, 
                 name: selectName,
@@ -126,11 +128,7 @@ const appData = {
 
         appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
         appData.servicePercentPrice = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
-        console.log(appData.servicePercentPrice);
     },
-    // getServicePercentPrices: function() {
-        
-    // },
     getRollbackMessage: function(price) {
         if (price >= 30000) {
             return "Даем скидку в 10%";
