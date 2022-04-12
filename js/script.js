@@ -18,8 +18,6 @@ const fullTotalCount = document.getElementsByClassName('total-input')[3];
 const totalCountRollback = document.getElementsByClassName('total-input')[4];
 
 let screens = document.querySelectorAll('.screen');
-let selectScreens = document.querySelector('select');
-let intupScreens = document.querySelector('input');
 
 const appData = {
     title: '',
@@ -39,8 +37,6 @@ const appData = {
         appData.addTitile();
         appData.addRangeSpan();
         appData.check();
-        selectScreens.addEventListener('change', appData.check);
-        intupScreens.addEventListener('blur', appData.check);
         startBtn.addEventListener('click', appData.start);
         buttonPlus.addEventListener('click', appData.addScreenBlock);
         inputRange.addEventListener('input', appData.addRangeSpan);        
@@ -51,31 +47,32 @@ const appData = {
     },
 
     check: function() {
+        console.log('запущен снова');
         startBtn.disabled = true;
+        
+        const selectScreens = document.querySelectorAll('select');
+        for (let i = 0; i < selectScreens.length; i++) {
+            selectScreens[i].addEventListener('change', appData.check);
+        }
 
-        screens = document.querySelectorAll('.screen');
-        console.log(screens);
-            
+        let intupScreens = document.querySelectorAll('input');
+        for (let i = 0; i < intupScreens.length; i++) {
+            intupScreens[i].addEventListener('blur', appData.check);
+        }
+
         screens.forEach(function(screen) {
             const select = screen.querySelector('select');
-            console.log(select);
-            const input = screen.querySelector('input').textContent;
-            console.log(input);
+            const input = +screen.querySelector('input').value;
             const selectName = select.options[select.selectedIndex].textContent;
 
             if (selectName == "Тип экранов" || input == '') {
                 console.log("не то");
-                startBtn.disabled = true
+                startBtn.disabled = true                
             } else {
                 console.log("то");
                 startBtn.disabled = false
-            };
-
+            }
         })
-
-        ;
-
-        
     },
 
     start: function() {
@@ -132,7 +129,6 @@ const appData = {
     addScreenBlock: function() {
         const cloneScreen = screens[0].cloneNode(true);
         screens[screens.length - 1].after(cloneScreen);
-
         appData.check()
     },
     addRangeSpan: function() {
