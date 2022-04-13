@@ -41,7 +41,6 @@ const appData = {
         appData.addListeners();
         appData.check();
         startBtn.addEventListener('click', appData.start);
-        startBtn.disabled = true;
         buttonPlus.addEventListener('click', appData.addScreenBlock);
         inputRange.addEventListener('input', appData.addRangeSpan);        
     },
@@ -61,6 +60,7 @@ const appData = {
         };
     },
     check: function() {
+        startBtn.disabled = true;
         appData.enumeration();
         
         let search = appData.screensArr.some(function(item) {
@@ -176,7 +176,6 @@ const appData = {
     logger: function() {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
-        console.log(appData.services);
     },    
 }
 
