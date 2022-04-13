@@ -24,6 +24,7 @@ let intupScreens = document.querySelectorAll('.screen input');
 const appData = {
     title: '',
     screens: [],
+    screensArr: [],
     screeCount: 0,
     screenPrice: 0,
     adaptive: true,
@@ -40,6 +41,7 @@ const appData = {
         appData.addListeners();
         appData.check();
         startBtn.addEventListener('click', appData.start);
+        startBtn.disabled = true;
         buttonPlus.addEventListener('click', appData.addScreenBlock);
         inputRange.addEventListener('input', appData.addRangeSpan);        
     },
@@ -59,33 +61,40 @@ const appData = {
         };
     },
     check: function() {
-        console.log('запущена проверка списка экранов');
+        appData.enumeration();
         
-        startBtn.disabled = true;
-        buttonPlus.disabled = true;        
-        
-        screens = document.querySelectorAll('.screen');
+        let search = appData.screensArr.some(function(item) {
+            if (item === "Тип экранов") {
+                return true;
+            } else if (item === 0) {
+                return true;
+            }
+            return false;                 
+        })
 
+        if (!search) {
+            startBtn.disabled = false;
+        };
+    },
+    enumeration: function() {
+        appData.screensArr = [];
+        screens = document.querySelectorAll('.screen');
+        
         screens.forEach(function(screen) {
             const select = screen.querySelector('select');
             const input = +screen.querySelector('input').value;
             const selectName = select.options[select.selectedIndex].textContent;
-
-            if (selectName === "Тип экранов" || input === 0) {
-                console.log("не то"); 
-            } else {
-                console.log("то");
-                startBtn.disabled = false;
-                buttonPlus.disabled = false;
-            };
+            
+            appData.screensArr.push(selectName);
+            appData.screensArr.push(input);
         });
     },
     addScreenBlock: function() {
         const cloneScreen = screens[0].cloneNode(true);
         screens[screens.length - 1].after(cloneScreen);
         appData.addListeners();
+        appData.check();
         startBtn.disabled = true;
-        buttonPlus.disabled = true;
     },
     addRangeSpan: function() {
         let size = +inputRange.value;
