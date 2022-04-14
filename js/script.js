@@ -100,6 +100,10 @@ const appData = {
         let size = +inputRange.value;
         inputRangeValue.textContent = size + '%';
         appData.rollback = size;
+
+        appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
+        
+        totalCountRollback.value = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
     },
     start: function() {
         appData.addScreens();
