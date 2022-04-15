@@ -36,13 +36,13 @@ const appData = {
     fullPrice: 0,
     servicePercentPrice: 0,
     init: function() {
-        appData.addTitile();
-        appData.addRangeSpan();
-        appData.addListeners();
-        appData.check();
-        startBtn.addEventListener('click', appData.start);
-        buttonPlus.addEventListener('click', appData.addScreenBlock);
-        inputRange.addEventListener('input', appData.addRangeSpan);        
+        this.addTitile();
+        this.addRangeSpan();
+        this.addListeners();
+        this.check();
+        startBtn.addEventListener('click', this.start);
+        buttonPlus.addEventListener('click', this.addScreenBlock);
+        inputRange.addEventListener('input', this.addRangeSpan);        
     },
     addTitile: function() {
         document.title = title.textContent;
@@ -52,11 +52,11 @@ const appData = {
         intupScreens = document.querySelectorAll('.screen input');
 
         for (let i = 0; i < selectScreens.length; i++) {
-            selectScreens[i].addEventListener('change', appData.check);
+            selectScreens[i].addEventListener('change', this.check);
         };        
         
         for (let i = 0; i < intupScreens.length; i++) {
-            intupScreens[i].addEventListener('input', appData.check);
+            intupScreens[i].addEventListener('input', this.check);
         };
     },
     check: function() {
@@ -77,7 +77,7 @@ const appData = {
         };
     },
     enumeration: function() {
-        appData.screensArr = [];
+        this.screensArr = [];
         screens = document.querySelectorAll('.screen');
         
         screens.forEach(screen => {
@@ -85,8 +85,8 @@ const appData = {
             const input = +screen.querySelector('input').value;
             const selectName = select.options[select.selectedIndex].textContent;
             
-            appData.screensArr.push(selectName);
-            appData.screensArr.push(input);
+            this.screensArr.push(selectName);
+            this.screensArr.push(input);
         });
     },
     addScreenBlock: function() {
@@ -99,11 +99,11 @@ const appData = {
     addRangeSpan: function() {
         let size = +inputRange.value;
         inputRangeValue.textContent = size + '%';
-        appData.rollback = size;
+        this.rollback = size;
 
-        appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
+        this.fullPrice = +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
         
-        totalCountRollback.value = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
+        totalCountRollback.value = Math.ceil(appData.fullPrice * (1 - this.rollback/100));
     },
     start: function() {
         appData.addScreens();
