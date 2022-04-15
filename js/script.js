@@ -63,7 +63,7 @@ const appData = {
         startBtn.disabled = true;
         appData.enumeration();
         
-        let search = appData.screensArr.some(function(item) {
+        let search = appData.screensArr.some(item => {
             if (item === "Тип экранов") {
                 return true;
             } else if (item === 0) {
@@ -80,7 +80,7 @@ const appData = {
         appData.screensArr = [];
         screens = document.querySelectorAll('.screen');
         
-        screens.forEach(function(screen) {
+        screens.forEach(screen => {
             const select = screen.querySelector('select');
             const input = +screen.querySelector('input').value;
             const selectName = select.options[select.selectedIndex].textContent;
@@ -115,7 +115,7 @@ const appData = {
     addScreens: function() {
         screens = document.querySelectorAll('.screen');
         
-        screens.forEach(function(screen, index) {
+        screens.forEach((screen, index) => {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
@@ -129,7 +129,7 @@ const appData = {
         });
     },
     addServices: function() {
-        otherItemsPercent.forEach(function(item) {
+        otherItemsPercent.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
@@ -138,7 +138,7 @@ const appData = {
                 appData.servicesPercent[label.textContent] = + input.value;
             };
         });
-        otherItemsNumber.forEach(function(item) {
+        otherItemsNumber.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
