@@ -5,6 +5,10 @@ const title = document.getElementsByTagName('h1')[0];
 const buttonPlus = document.querySelector('.screen-btn');
 const otherItemsPercent = document.querySelectorAll('.other-items.percent');
 const otherItemsNumber = document.querySelectorAll('.other-items.number');
+const cmsOpen = document.querySelector('#cms-open');
+const cmsSelect = document.querySelector('#cms-select');
+const cmsOther = document.querySelector('.hidden-cms-variants .main-controls__input');
+const cmsVariants = document.querySelector('.hidden-cms-variants');
 const inputRange = document.querySelector('.rollback input');
 const inputRangeValue = document.querySelector('.rollback .range-value');
 
@@ -20,7 +24,8 @@ const totalCountRollback = document.getElementsByClassName('total-input')[4];
 let screens = document.querySelectorAll('.screen');
 let selectScreens = document.querySelectorAll('.screen select');
 let intupScreens = document.querySelectorAll('.screen input');
-
+let cmsSelectName = cmsSelect.options[cmsSelect.selectedIndex];
+let cmsOtherInput = document.querySelector('#cms-other-input');
 let mainControlsItems = document.querySelectorAll('.main-controls input[type="text"], select');
 
 const appData = {
@@ -45,7 +50,10 @@ const appData = {
         startBtn.addEventListener('click', this.start);
         resetBtn.addEventListener('click', this.reset);
         buttonPlus.addEventListener('click', this.addScreenBlock);
-        inputRange.addEventListener('input', this.addRangeSpan);        
+        cmsOpen.addEventListener('click', this.cmsOpen);
+        cmsOtherInput.addEventListener('input', this.check);
+        cmsSelect.addEventListener('change', this.cmsOpenOther);
+        inputRange.addEventListener('input', this.addRangeSpan);
     },
     addTitile: function() {
         document.title = title.textContent;
@@ -72,12 +80,12 @@ const appData = {
             } else if (item === 0) {
                 return true;
             }
-            return false;                 
+            return false;
         })
 
         if (!search) {
             startBtn.disabled = false;
-        };
+        }
     },
     enumeration: function() {
         this.screensArr = [];
@@ -90,6 +98,9 @@ const appData = {
             
             this.screensArr.push(selectName);
             this.screensArr.push(input);
+            if (cmsOpen.checked === true || cmsSelectName.textContent === "Другое") {
+                this.screensArr.push(+cmsOtherInput.value);
+            }
         });
     },
     addScreenBlock: function() {
@@ -98,6 +109,28 @@ const appData = {
         appData.addListeners();
         appData.check();
         startBtn.disabled = true;
+    },
+    cmsOpen: function() {
+        if (cmsVariants.style.display === 'none') {
+            cmsSelect.selectedIndex = 0;
+            cmsOtherInput.value = '';
+            cmsOther.setAttribute("style", "display: none");
+            cmsVariants.setAttribute("style", "display: flex");
+            appData.check();
+        } else {
+            cmsVariants.setAttribute("style", "display: none");
+            appData.check();
+        };
+    },
+    cmsOpenOther: function() {
+        cmsSelectName = cmsSelect.options[cmsSelect.selectedIndex];
+        if (cmsSelectName.textContent === "Другое") {
+            cmsOther.setAttribute("style", "display: block");
+        } else {
+            cmsOther.setAttribute("style", "display: none");
+        };
+        cmsOtherInput.value= '';
+        appData.check();
     },
     addRangeSpan: function() {
         let size = +inputRange.value;
@@ -181,7 +214,7 @@ const appData = {
         totalCountRollback.value = this.servicePercentPrice;
     },
     stop: function() {
-        mainControlsItems = document.querySelectorAll('.screen select, .screen input[type="text"], .other-items input[type="checkbox"], .cms select, .cms input[type="checkbox"]');
+        mainControlsItems = document.querySelectorAll('.screen select, .screen input[type="text"], .other-items input[type="checkbox"], .cms select, .cms input');
 
         for (let elem of mainControlsItems) {
             elem.disabled = true;
@@ -193,6 +226,7 @@ const appData = {
     reset: function() {
         appData.resetScreens();
         appData.resetServices();
+        appData.resetCms();
         appData.resetRange();
         appData.resetShowResult();
         appData.resetResult();
@@ -212,6 +246,12 @@ const appData = {
                 check[i].checked = false
             };
         };
+    },
+    resetCms: function() {
+        cmsSelect.selectedIndex = 0;
+        cmsOtherInput.value = '';
+        cmsVariants.setAttribute("style", "display: none");
+        cmsOther.setAttribute("style", "display: none");
     },
     resetRange: function() {
         inputRange.value = '0';
