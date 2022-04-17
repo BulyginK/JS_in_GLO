@@ -81,11 +81,11 @@ const appData = {
                 return true;
             }
             return false;
-        })
+        });
 
         if (!search) {
             startBtn.disabled = false;
-        }
+        };
     },
     enumeration: function() {
         this.screensArr = [];
@@ -98,7 +98,10 @@ const appData = {
             
             this.screensArr.push(selectName);
             this.screensArr.push(input);
-            if (cmsOpen.checked === true || cmsSelectName.textContent === "Другое") {
+
+            if (cmsOpen.checked === true && cmsSelectName.textContent === "Другое") {
+                this.screensArr.push(+cmsOtherInput.value);
+            } else if (cmsOpen.checked === true && cmsSelectName.textContent === "Тип CMS") {
                 this.screensArr.push(+cmsOtherInput.value);
             }
         });
@@ -129,15 +132,13 @@ const appData = {
         } else {
             cmsOther.setAttribute("style", "display: none");
         };
-        cmsOtherInput.value= '';
+        cmsOtherInput.value = '';
         appData.check();
     },
     addRangeSpan: function() {
         let size = +inputRange.value;
         inputRangeValue.textContent = size + '%';
         appData.rollback = size;
-        
-        appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
 
         totalCountRollback.value = Math.ceil(appData.fullPrice * (1 - appData.rollback/100));
     },
@@ -203,8 +204,19 @@ const appData = {
             this.servicePricesNumber += this.servicesNumber[key];
         }
 
-        this.fullPrice = +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
+        if (cmsSelectName.textContent === "WordPress") {
+            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect[1].value / 100)
+        } else if (cmsSelectName.textContent === "Другое") {
+            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + cmsOtherInput.value / 100)
+        } else {
+            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect.options[cmsSelect.selectedIndex].value / 100)
+        }
+
+        console.log(this.fullPrice);
+        console.log(this.rollback);
+
         this.servicePercentPrice = Math.ceil(this.fullPrice * (1 - this.rollback/100));
+       
     },
     showResult: function() {
         total.value = this.screenPrice;
