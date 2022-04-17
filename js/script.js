@@ -181,7 +181,7 @@ const appData = {
         totalCountRollback.value = this.servicePercentPrice;
     },
     stop: function() {
-        mainControlsItems = document.querySelectorAll('.main-controls input[type="text"], input[type="checkbox"], select');
+        mainControlsItems = document.querySelectorAll('.screen select, .screen input[type="text"], .other-items input[type="checkbox"], .cms select, .cms input[type="checkbox"]');
 
         for (let elem of mainControlsItems) {
             elem.disabled = true;
@@ -225,18 +225,18 @@ const appData = {
         totalCountRollback.value = '0';
     },
     resetResult: function() {
-        appData.screens = [];
-        appData.screensArr = [];
-        appData.screeCount = 0;
-        appData.screenPrice = 0;
-        appData.adaptive = true;
-        appData.rollback = 0;
-        appData.servicesPercent = {};
-        appData.servicesNumber = {};
-        appData.servicePricesPercent = 0;
-        appData.servicePricesNumber = 0;
-        appData.fullPrice = 0;
-        appData.servicePercentPrice = 0;
+        this.screens = [];
+        this.screensArr = [];
+        this.screeCount = 0;
+        this.screenPrice = 0;
+        this.adaptive = true;
+        this.rollback = 0;
+        this.servicesPercent = {};
+        this.servicesNumber = {};
+        this.servicePricesPercent = 0;
+        this.servicePricesNumber = 0;
+        this.fullPrice = 0;
+        this.servicePercentPrice = 0;
     },
     resetStop: function() {
         for (let elem of mainControlsItems) {
