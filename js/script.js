@@ -108,6 +108,7 @@ const appData = {
     },
     addScreenBlock: function() {
         const cloneScreen = screens[0].cloneNode(true);
+        cloneScreen.children[1].childNodes[1].value = '';
         screens[screens.length - 1].after(cloneScreen);
         appData.addListeners();
         appData.check();
@@ -205,18 +206,14 @@ const appData = {
         }
 
         if (cmsSelectName.textContent === "WordPress") {
-            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect[1].value / 100)
+            this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect[1].value / 100))
         } else if (cmsSelectName.textContent === "Другое") {
-            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + cmsOtherInput.value / 100)
+            this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + cmsOtherInput.value / 100))
         } else {
-            this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect.options[cmsSelect.selectedIndex].value / 100)
+            this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect.options[cmsSelect.selectedIndex].value / 100))
         }
 
-        console.log(this.fullPrice);
-        console.log(this.rollback);
-
         this.servicePercentPrice = Math.ceil(this.fullPrice * (1 - this.rollback/100));
-       
     },
     showResult: function() {
         total.value = this.screenPrice;
@@ -238,7 +235,6 @@ const appData = {
     reset: function() {
         appData.resetScreens();
         appData.resetServices();
-        appData.resetCms();
         appData.resetRange();
         appData.resetShowResult();
         appData.resetResult();
@@ -258,12 +254,6 @@ const appData = {
                 check[i].checked = false
             };
         };
-    },
-    resetCms: function() {
-        cmsSelect.selectedIndex = 0;
-        cmsOtherInput.value = '';
-        cmsVariants.setAttribute("style", "display: none");
-        cmsOther.setAttribute("style", "display: none");
     },
     resetRange: function() {
         inputRange.value = '0';
@@ -298,6 +288,12 @@ const appData = {
         buttonPlus.disabled = false;
         startBtn.style.display = 'block';
         resetBtn.style.display = 'none';
+        cmsSelect.selectedIndex = 0;
+        cmsOtherInput.value = '';
+        cmsVariants.setAttribute("style", "display: none");
+        cmsOther.setAttribute("style", "display: none");
+        console.log(cmsSelect.selectedIndex);
+        console.log(cmsOtherInput.value);
     },
     logger: function() {
         console.log(this.fullPrice);
