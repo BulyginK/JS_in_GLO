@@ -210,8 +210,8 @@ const appData = {
         } else if (cmsSelectName.textContent === "Другое") {
             this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + cmsOtherInput.value / 100))
         } else {
-            this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (1 + +cmsSelect.options[cmsSelect.selectedIndex].value / 100))
-        }
+            this.fullPrice = Math.ceil((+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber))
+    }
 
         this.servicePercentPrice = Math.ceil(this.fullPrice * (1 - this.rollback/100));
     },
@@ -279,6 +279,7 @@ const appData = {
         this.servicePricesNumber = 0;
         this.fullPrice = 0;
         this.servicePercentPrice = 0;
+        cmsOtherInput.value = 0;
     },
     resetStop: function() {
         for (let elem of mainControlsItems) {
@@ -288,12 +289,9 @@ const appData = {
         buttonPlus.disabled = false;
         startBtn.style.display = 'block';
         resetBtn.style.display = 'none';
-        cmsSelect.selectedIndex = 0;
-        cmsOtherInput.value = '';
+        cmsSelectName = cmsSelect.options[0];
         cmsVariants.setAttribute("style", "display: none");
         cmsOther.setAttribute("style", "display: none");
-        console.log(cmsSelect.selectedIndex);
-        console.log(cmsOtherInput.value);
     },
     logger: function() {
         console.log(this.fullPrice);
